@@ -1,4 +1,4 @@
-const Joi = require('joi');
+const Joi = require('@hapi/joi');
 const Router = require('koa-router');
 const Static = require('koa-static');
 const Mount = require('koa-mount');
@@ -27,7 +27,7 @@ const defaultConfig = {
 
 module.exports = class RouteRegister {
 
-  constructor(app, {router, swagger, docs}) {
+  constructor(app, {router, swagger, docs} = {}) {
     this.app = app;
     this.config = {
       router: router ? {...router} : {...defaultConfig.router},
@@ -117,7 +117,6 @@ module.exports = class RouteRegister {
       this[method.toLowerCase()] = (path, config, ...params) => {
         const data = typeof config == 'object' ? config : {config: {}};
         const handler = typeof config == 'object' ? params : [config, ...params];
-        if (!data.config) data.config = {};
         data.config.handler = handler;
         return this.register({method, path, config: data});
       }

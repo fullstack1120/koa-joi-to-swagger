@@ -116,6 +116,12 @@ describe('joiTransfer', () => {
       result.should.have.property('format', 'byte');
     })
 
+    it('should return object when params provided#regex', () => {
+      const rule = Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/);
+      const result = joiTransfer.transfer(rule.describe());
+      result.should.have.property('pattern');
+    })
+
   });
 
   describe('arrayTransfer', () => {
@@ -141,6 +147,13 @@ describe('joiTransfer', () => {
       const result = joiTransfer.transfer(rule.describe());
       result.should.have.property('type', 'array');
       result.should.have.property('items');
+    })
+
+    it('should return object when params provided#unique items', () => {
+      const rule = Joi.array().items(Joi.string()).unique();
+      const result = joiTransfer.transfer(rule.describe());
+      result.should.have.property('type', 'array');
+      result.should.have.property('uniqueItems');
     })
 
     it('should return object when params provided#multi items', () => {

@@ -18,7 +18,7 @@ describe('swaggerTransfer', () => {
       const schema = joiTransfer.transfer(rule.describe());
       swaggerTransfer.decorate(schema);
       schema.should.not.have.property('required');
-      schema.items[0].should.have.property('required', ['title']);
+      schema.items.should.have.property('required', ['title']);
     })
 
     it('should return object when params provided', () => {

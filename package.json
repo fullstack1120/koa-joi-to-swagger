@@ -1,16 +1,25 @@
 {
   "name": "koa-joi-to-swagger",
-  "version": "1.0.0",
-  "description": "koa validator and auto docs base on joi and swagger",
+  "version": "0.1.0",
+  "description": "Koa validator and auto docs base on joi and swagger",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "nyc mocha test/*"
   },
   "author": {
-    "name": "FullStack",
+    "name": "fullstack1120",
     "email": "fullstack1120@gmail.com",
     "url": "https://github.com/fullstack1120"
   },
+  "keywords": [
+    "koa",
+    "joi",
+    "router",
+    "swagger",
+    "validate",
+    "validator",
+    "validation"
+  ],
   "license": "ISC",
   "dependencies": {
     "@hapi/joi": "^15.0.1",
@@ -23,6 +32,9 @@
     "koa": "^2.7.0",
     "koa-body": "^4.1.0",
     "mocha": "^6.1.4",
+    "nyc": "^14.1.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4",
     "should": "^13.2.3"
   }
 }
