@@ -17,7 +17,7 @@ See [example][]
 
 ## Usage
 Koa-joi-to-swagger returns a constructor which you use to define your routes.
-````
+````js
 const Koa = require('koa');
 const KoaBody = require('koa-body');
 const Joi = require('@hapi/joi');
