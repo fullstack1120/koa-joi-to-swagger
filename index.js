@@ -79,7 +79,9 @@ module.exports = class RouteRegister {
   }
 
   staticDocs() {
-    this.swagger = this.config.swagger;
+    if (!this.app.context.swagger) this.app.context.swagger = {};
+    if (!this.app.context.swagger[this.config.docs.prefix]) this.app.context.swagger[this.config.docs.prefix] = this.config.swagger;
+    this.swagger = this.app.context.swagger[this.config.docs.prefix];
     const pathToSwaggerUI = SwaggerUI.absolutePath();
     const router = new Router();
     const indexHtml = fs.readFileSync(`${pathToSwaggerUI}/index.html`).toString().replace(/url:.*,/, 'url: "./swagger.json",');

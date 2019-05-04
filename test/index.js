@@ -9,9 +9,12 @@ describe('Router', () => {
 
   const app = new Koa();
   const router = new Router(app, {docs: {prefix: '/docs'}});
+  const routerArticle = new Router(app, {docs: {prefix: '/docs/article'}});
   app.use(KoaBody());
   app.use(router.routes());
   app.use(router.allowedMethods());
+  app.use(routerArticle.routes());
+  app.use(routerArticle.allowedMethods());
   const server = app.listen(3000);
 
   before(() => {
@@ -265,7 +268,7 @@ describe('Router', () => {
 
     before(() => {
 
-      router.get('/articles', {
+      routerArticle.get('/articles', {
         summary: 'query articles',
         response: {
           schema: {
@@ -293,7 +296,7 @@ describe('Router', () => {
         ctx.body = {count: 100, rows: articles};
       });
 
-      router.get('/articles/:id', ctx => {
+      routerArticle.get('/articles/:id', ctx => {
         const {id} = ctx.params;
         ctx.body = {id, title: `title${id}`};
       });
