@@ -1,5 +1,5 @@
 # Koa-joi-to-swagger
-Koa validator and auto docs base on koa-router, joi and swagger
+Koa route validator and auto docs base on koa-router, joi and swagger
 
 ## Features:
 - built in input validation using [joi][]
@@ -39,20 +39,17 @@ router.register({
     response: {
       schema: Joi.array().items(Joi.object({name: Joi.string()}))
     },
-    config: {
-      validate: {
-        query: {
-          page: Joi.number().integer().min(1).default(1),
-          size: Joi.number().integer().min(1).max(50).default(10)
-        }
-      },
-      handler: async ctx => {
-        ctx.body = [{name: 'Jack'}];
+    validate: {
+      query: {
+        page: Joi.number().integer().min(1).default(1),
+        size: Joi.number().integer().min(1).max(50).default(10)
       }
+    },
+    handler: async ctx => {
+      ctx.body = [{name: 'Jack'}];
     }
   }
 });
-
 ````
 API documentation url: http://localhost:3000/docs/
 
@@ -77,4 +74,4 @@ npm run test
 [joi]: https://github.com/hapijs/joi
 [swagger-ui]: https://github.com/swagger-api/swagger-ui
 [koa-router]: https://github.com/ZijianHe/koa-router
-[example]: ./example
+[example]: https://github.com/fullstack1120/koa-joi-to-swagger/tree/master/example

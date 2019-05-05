@@ -19,16 +19,14 @@ router.register({
     response: {
       schema: Joi.array().items(Joi.object({name: Joi.string()}))
     },
-    config: {
-      validate: {
-        query: {
-          page: Joi.number().integer().min(1).default(1),
-          size: Joi.number().integer().min(1).max(50).default(10)
-        }
-      },
-      handler: async ctx => {
-        ctx.body = [{name: 'Jack'}];
+    validate: {
+      query: {
+        page: Joi.number().integer().min(1).default(1),
+        size: Joi.number().integer().min(1).max(50).default(10)
       }
+    },
+    handler: async ctx => {
+      ctx.body = [{name: 'Jack'}];
     }
   }
 });

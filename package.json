@@ -1,7 +1,7 @@
 {
   "name": "koa-joi-to-swagger",
   "version": "0.1.0",
-  "description": "Koa validator and auto docs base on koa-router, joi and swagger",
+  "description": "Koa route validator and auto docs base on koa-router, joi and swagger",
   "main": "index.js",
   "scripts": {
     "test": "nyc mocha test/*"
