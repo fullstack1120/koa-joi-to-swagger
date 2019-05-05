@@ -43,7 +43,7 @@ module.exports = class RouteRegister {
   }
 
   register(options) {
-    const {method, path, config: {config: {validate = {}, handler}}} = options;
+    const {method, path, config: {validate = {}, handler}} = options;
     this.router[method.toLowerCase()](path, this.validate(validate), ...(Array.isArray(handler) ? handler : [handler]));
     if (this.autoDocs) this.addDocs(options);
   }
@@ -94,7 +94,7 @@ module.exports = class RouteRegister {
   }
 
   addDocs(options) {
-    const {method, path, config: {summary, description, response = {schema: {}}, config: {validate = {}}}} = options;
+    const {method, path, config: {summary, description, response = {schema: {}}, validate = {}}} = options;
     const fullPath = `${this.config.router.prefix}${path}`;
     if (!this.swagger.paths[fullPath]) this.swagger.paths[fullPath] = {};
     const tags = [fullPath.split('/')[this.config.docs.groupIndex + 1]];
@@ -117,9 +117,9 @@ module.exports = class RouteRegister {
   wrap() {
     this.router.methods.forEach(method => {
       this[method.toLowerCase()] = (path, config, ...params) => {
-        const data = typeof config == 'object' ? config : {config: {}};
+        const data = typeof config == 'object' ? config : {};
         const handler = typeof config == 'object' ? params : [config, ...params];
-        data.config.handler = handler;
+        data.handler = handler;
         return this.register({method, path, config: data});
       }
     });

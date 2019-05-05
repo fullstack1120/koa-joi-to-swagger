@@ -83,21 +83,19 @@ describe('Router', () => {
               }))
             }
           },
-          config: {
-            validate: {
-              query: {
-                page: Joi.number().integer().min(1).default(1),
-                size: Joi.number().integer().min(1).max(50).default(10)
-              }
-            },
-            handler: async ctx => {
-              const {page, size} = ctx.query;
-              const users = [];
-              for (let i = 0; i < size; i++) {
-                users.push({id: (page - 1) * size + i, name: `robot${i}`})
-              }
-              ctx.body = {count: 100, rows: users};
+          validate: {
+            query: {
+              page: Joi.number().integer().min(1).default(1),
+              size: Joi.number().integer().min(1).max(50).default(10)
             }
+          },
+          handler: async ctx => {
+            const {page, size} = ctx.query;
+            const users = [];
+            for (let i = 0; i < size; i++) {
+              users.push({id: (page - 1) * size + i, name: `robot${i}`})
+            }
+            ctx.body = {count: 100, rows: users};
           }
         }
       });
@@ -113,16 +111,14 @@ describe('Router', () => {
               name: Joi.string().description('username')
             }
           },
-          config: {
-            validate: {
-              params: {
-                id: Joi.number().integer().required().description('user id')
-              }
-            },
-            handler: async ctx => {
-              const {id} = ctx.params;
-              ctx.body = {id, name: `robot${id}`};
+          validate: {
+            params: {
+              id: Joi.number().integer().required().description('user id')
             }
+          },
+          handler: async ctx => {
+            const {id} = ctx.params;
+            ctx.body = {id, name: `robot${id}`};
           }
         }
       });
@@ -138,19 +134,17 @@ describe('Router', () => {
               name: Joi.string().description('username')
             }
           },
-          config: {
-            validate: {
-              headers: Joi.object({
-                authorization: Joi.string().required()
-              }).unknown(),
-              body: {
-                name: Joi.string().min(2).max(30).required().description('username')
-              }
-            },
-            handler: async ctx => {
-              const {name} = ctx.request.body;
-              ctx.body = {id: 101, name};
+          validate: {
+            headers: Joi.object({
+              authorization: Joi.string().required()
+            }).unknown(),
+            body: {
+              name: Joi.string().min(2).max(30).required().description('username')
             }
+          },
+          handler: async ctx => {
+            const {name} = ctx.request.body;
+            ctx.body = {id: 101, name};
           }
         }
       });
@@ -279,12 +273,10 @@ describe('Router', () => {
             }))
           }
         },
-        config: {
-          validate: {
-            query: {
-              page: Joi.number().integer().min(1).default(1),
-              size: Joi.number().integer().min(1).max(50).default(10)
-            }
+        validate: {
+          query: {
+            page: Joi.number().integer().min(1).default(1),
+            size: Joi.number().integer().min(1).max(50).default(10)
           }
         }
       }, ctx => {
