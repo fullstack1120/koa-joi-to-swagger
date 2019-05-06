@@ -37,7 +37,9 @@ router.register({
   config: {
     summary: 'query users',
     response: {
-      schema: Joi.array().items(Joi.object({name: Joi.string()}))
+      200: {
+        body: Joi.array().items(Joi.object({name: Joi.string()}))
+      }
     },
     validate: {
       query: {
