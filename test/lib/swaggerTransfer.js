@@ -139,4 +139,26 @@ describe('swaggerTransfer', () => {
 
   });
 
+  describe('transResponse', () => {
+
+    it('should return object when params provided', () => {
+      const validate = {
+        200: {
+          headers: Joi.object({
+            authorization: Joi.string().required()
+          }).unknown(),
+          body: {
+            title: Joi.string().max(100).required(),
+            content: Joi.string().max(500).required(),
+            tags: Joi.array().items(Joi.string().max(10))
+          }
+        }
+      };
+      const swagger = swaggerTransfer.transResponse(validate);
+      swagger.should.have.property('responses');
+      swagger.responses.should.have.property('200');
+    })
+
+  });
+
 });

@@ -94,12 +94,12 @@ module.exports = class RouteRegister {
   }
 
   addDocs(options) {
-    const {method, path, config: {summary, description, response = {schema: {}}, validate = {}}} = options;
+    const {method, path, config: {summary, description, response = {}, validate = {}}} = options;
     const fullPath = `${this.config.router.prefix}${path}`;
     if (!this.swagger.paths[fullPath]) this.swagger.paths[fullPath] = {};
     const tags = [fullPath.split('/')[this.config.docs.groupIndex + 1]];
     const doc = {tags, summary, description};
-    this.swagger.paths[fullPath][method.toLowerCase()] = Object.assign(doc, swaggerTransfer.transfer(validate), swaggerTransfer.transResponse(response.schema));
+    this.swagger.paths[fullPath][method.toLowerCase()] = Object.assign(doc, swaggerTransfer.transfer(validate), swaggerTransfer.transResponse(response));
   }
 
   use(...params) {
