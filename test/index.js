@@ -23,7 +23,7 @@ describe('Router', () => {
 
   after(() => {
     setTimeout(() => server.close(), 10);
-  })
+  });
 
   describe('constructor', () => {
 
@@ -75,12 +75,14 @@ describe('Router', () => {
         config: {
           summary: 'query users',
           response: {
-            schema: {
-              count: Joi.number().integer(),
-              rows: Joi.array().items(Joi.object({
-                id: Joi.number().integer().description('user id'),
-                name: Joi.string().description('username')
-              }))
+            200: {
+              body: {
+                count: Joi.number().integer(),
+                rows: Joi.array().items(Joi.object({
+                  id: Joi.number().integer().description('user id'),
+                  name: Joi.string().description('username')
+                }))
+              }
             }
           },
           validate: {
@@ -106,9 +108,11 @@ describe('Router', () => {
         config: {
           summary: 'query user by id',
           response: {
-            schema: {
-              id: Joi.number().integer().description('user id'),
-              name: Joi.string().description('username')
+            200: {
+              body: {
+                id: Joi.number().integer().description('user id'),
+                name: Joi.string().description('username')
+              }
             }
           },
           validate: {
@@ -129,9 +133,26 @@ describe('Router', () => {
         config: {
           summary: 'create user',
           response: {
-            schema: {
-              id: Joi.number().integer().description('user id'),
-              name: Joi.string().description('username')
+            200: {
+              headers: Joi.object({
+                authorization: Joi.string()
+              }).unknown(),
+              body: {
+                id: Joi.number().integer().description('user id'),
+                name: Joi.string().description('username')
+              }
+            },
+            400: {
+              body: {
+                code: Joi.number().integer().description('error code'),
+                message: Joi.string().description('error message')
+              }
+            },
+            401: {
+              body: {
+                code: Joi.number().integer().description('error code'),
+                message: Joi.string().description('error message')
+              }
             }
           },
           validate: {
@@ -265,12 +286,14 @@ describe('Router', () => {
       routerArticle.get('/articles', {
         summary: 'query articles',
         response: {
-          schema: {
-            count: Joi.number().integer(),
-            rows: Joi.array().items(Joi.object({
-              id: Joi.number().integer().description('id'),
-              title: Joi.string().description('title')
-            }))
+          200: {
+            body: {
+              count: Joi.number().integer(),
+              rows: Joi.array().items(Joi.object({
+                id: Joi.number().integer().description('id'),
+                title: Joi.string().description('title')
+              }))
+            }
           }
         },
         validate: {
