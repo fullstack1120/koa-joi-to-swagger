@@ -176,7 +176,7 @@ describe('Router', () => {
 
     it('should return object when params provided#get /users', async () => {
 
-      request({
+      return request({
         url: 'http://localhost:3000/users',
         method: 'get',
         json: true
@@ -189,7 +189,7 @@ describe('Router', () => {
 
     it('should return error when params wrong#get /users', async () => {
 
-      request({
+      return request({
         url: 'http://localhost:3000/users',
         method: 'get',
         qs: {size: 100},
@@ -202,7 +202,7 @@ describe('Router', () => {
 
     it('should return object when params provided#get /users/:id', async () => {
 
-      request({
+      return request({
         url: 'http://localhost:3000/users/100',
         method: 'get',
         json: true
@@ -215,7 +215,7 @@ describe('Router', () => {
 
     it('should return error when params wrong#get /users/:id', async () => {
 
-      request({
+      return request({
         url: 'http://localhost:3000/users/***',
         method: 'get',
         json: true
@@ -227,7 +227,7 @@ describe('Router', () => {
 
     it('should return object when params provided#post /users', async () => {
 
-      request({
+      return request({
         url: 'http://localhost:3000/users',
         method: 'post',
         headers: {
@@ -246,7 +246,7 @@ describe('Router', () => {
 
     it('should return error when params wrong#post /users', async () => {
 
-      request({
+      return request({
         url: 'http://localhost:3000/users',
         method: 'post',
         body: {
@@ -261,7 +261,7 @@ describe('Router', () => {
 
     it('should return error when params wrong#post /users', async () => {
 
-      request({
+      return request({
         url: 'http://localhost:3000/users',
         method: 'post',
         headers: {
@@ -322,7 +322,7 @@ describe('Router', () => {
 
     it('should return object when params provided#get /articles', async () => {
 
-      request({
+      return request({
         url: 'http://localhost:3000/articles',
         method: 'get',
         json: true
@@ -335,7 +335,7 @@ describe('Router', () => {
 
     it('should return object when params provided#get /articles/:id', async () => {
 
-      request({
+      return request({
         url: 'http://localhost:3000/articles/100',
         method: 'get',
         json: true

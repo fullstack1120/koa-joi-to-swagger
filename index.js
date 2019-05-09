@@ -49,7 +49,7 @@ module.exports = class RouteRegister {
   }
 
   validate(config = {}) {
-    return (ctx, next) => {
+    return async (ctx, next) => {
 
       if (config.headers) {
         const {error} = Joi.validate(ctx.headers, config.headers);
@@ -74,7 +74,7 @@ module.exports = class RouteRegister {
         ctx.request.body = value;
       }
 
-      next();
+      await next();
     }
   }
 
