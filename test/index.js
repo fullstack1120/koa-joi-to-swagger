@@ -291,7 +291,8 @@ describe('Router', () => {
               count: Joi.number().integer(),
               rows: Joi.array().items(Joi.object({
                 id: Joi.number().integer().description('id'),
-                title: Joi.string().description('title')
+                title: Joi.string().description('title'),
+                author: Joi.object().allow()
               }))
             }
           }
