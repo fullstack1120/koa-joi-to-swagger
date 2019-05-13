@@ -8,8 +8,8 @@ const Router = require('../index');
 describe('Router', () => {
 
   const app = new Koa();
-  const router = new Router(app, {docs: {prefix: '/docs'}});
-  const routerArticle = new Router(app, {docs: {prefix: '/docs/article'}});
+  const router = new Router(app, {docs: {prefix: '/docs', groupIndex: 0}});
+  const routerArticle = new Router(app, {docs: {prefix: '/docs/article', groupIndex: 0}});
   app.use(KoaBody());
   app.use(router.routes());
   app.use(router.allowedMethods());
